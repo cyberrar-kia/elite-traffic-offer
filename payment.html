@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Complete Payment — Elite Traffic Media</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#07070A;--bg-card:#0F0F14;--red:#E8180A;--red-mid:rgba(232,24,10,0.18);--red-low:rgba(232,24,10,0.07);--gold:#FFB800;--gold-mid:rgba(255,184,0,0.12);--white:#F0F0F4;--muted:#7A7A8C;--border:rgba(255,255,255,0.06);--border-red:rgba(232,24,10,0.35);--border-gold:rgba(255,184,0,0.35);--green:#25D366}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--white);font-family:'Outfit',sans-serif;font-size:16px;line-height:1.7;min-height:100vh;overflow-x:hidden}
+  body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.6}
+  .topbar{background:rgba(232,24,10,0.92);padding:10px 0;text-align:center;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;position:sticky;top:0;z-index:100;backdrop-filter:blur(8px)}
+  .wrap{max-width:600px;margin:0 auto;padding:60px 24px 80px;position:relative;z-index:1}
+  .back-link{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:13px;text-decoration:none;margin-bottom:40px;transition:color .2s}
+  .back-link:hover{color:var(--white)}
+  .page-tag{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin-bottom:12px}
+  .page-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(42px,8vw,72px);line-height:.95;margin-bottom:8px}
+  .plan-label{font-size:15px;color:var(--muted);margin-bottom:48px}
+  .plan-label strong{color:var(--gold)}
+
+  /* AMOUNT BOX */
+  .amount-box{background:var(--bg-card);border:1px solid var(--border-gold);border-radius:16px;padding:36px;margin-bottom:24px;text-align:center;position:relative;overflow:hidden}
+  .amount-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),#FFF0A0,var(--gold))}
+  .amount-label{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+  .amount-value{font-family:'Bebas Neue',sans-serif;font-size:clamp(64px,14vw,100px);line-height:1;color:var(--gold);letter-spacing:.02em}
+  .amount-note{font-size:12px;color:var(--muted);margin-top:8px}
+
+  /* BANK CARD */
+  .bank-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:32px;margin-bottom:24px;position:relative;overflow:hidden}
+  .bank-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--red)}
+  .bank-header{display:flex;align-items:center;gap:12px;margin-bottom:28px}
+  .bank-icon{width:44px;height:44px;background:var(--red-low);border:1px solid var(--border-red);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+  .bank-header h3{font-size:16px;font-weight:700}
+  .bank-header p{font-size:13px;color:var(--muted)}
+  .bank-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--border)}
+  .bank-row:last-child{border-bottom:none}
+  .bank-row-label{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .bank-row-value{font-size:15px;font-weight:700;color:var(--white);text-align:right}
+  .bank-row-value.acct-num{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--gold);letter-spacing:.05em}
+  .copy-btn{background:transparent;border:1px solid var(--border);color:var(--muted);font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;cursor:pointer;transition:all .2s;font-family:'Outfit',sans-serif;text-transform:uppercase;letter-spacing:.06em;margin-left:8px}
+  .copy-btn:hover{border-color:var(--border-gold);color:var(--gold)}
+  .copy-btn.copied{border-color:rgba(37,211,102,.4);color:#25D366}
+
+  /* STEPS */
+  .steps-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:28px 32px;margin-bottom:32px}
+  .steps-title{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:20px}
+  .step-item{display:flex;gap:14px;margin-bottom:16px;align-items:flex-start}
+  .step-item:last-child{margin-bottom:0}
+  .step-num{width:26px;height:26px;background:var(--red-low);border:1px solid var(--border-red);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#FF6B60;flex-shrink:0;margin-top:2px}
+  .step-text{font-size:14px;color:var(--white);line-height:1.6}
+  .step-text span{color:var(--muted)}
+
+  /* WHATSAPP CTA */
+  .wa-section{text-align:center;padding:8px 0 0}
+  .wa-divider{display:flex;align-items:center;gap:12px;margin-bottom:28px}
+  .wa-divider::before,.wa-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+  .wa-divider span{font-size:12px;color:var(--muted);white-space:nowrap;text-transform:uppercase;letter-spacing:.08em}
+  .wa-btn{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;background:#25D366;color:#fff;padding:20px;border-radius:12px;text-decoration:none;font-size:16px;font-weight:700;letter-spacing:.03em;transition:all .2s;box-shadow:0 0 40px rgba(37,211,102,.25);border:none;cursor:pointer;font-family:'Outfit',sans-serif}
+  .wa-btn:hover{box-shadow:0 0 60px rgba(37,211,102,.45);transform:translateY(-2px)}
+  .wa-btn svg{width:24px;height:24px;fill:#fff;flex-shrink:0}
+  .wa-note{font-size:12px;color:var(--muted);margin-top:12px;line-height:1.6}
+  .wa-note strong{color:var(--white)}
+
+  /* FOOTER */
+  .pay-footer{text-align:center;padding-top:48px}
+  .footer-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.06em;margin-bottom:4px}
+  .footer-logo span{color:var(--red)}
+  .pay-footer p{font-size:12px;color:var(--muted)}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  .fu{animation:fadeUp .6s ease both}
+  .fu-1{animation-delay:.05s}.fu-2{animation-delay:.15s}.fu-3{animation-delay:.25s}.fu-4{animation-delay:.35s}.fu-5{animation-delay:.45s}
+</style>
+</head>
+<body>
+
+<div class="topbar">🔒 Secure Payment — Elite Traffic Media Agency</div>
+
+<div class="wrap">
+  <a href="index.html" class="back-link fu">← Back to Plans</a>
+
+  <p class="page-tag fu fu-1">Complete Your Payment</p>
+  <h1 class="page-title fu fu-1" id="page-title">MAKE YOUR<br>TRANSFER</h1>
+  <p class="plan-label fu fu-2">You selected: <strong id="plan-name-display">—</strong></p>
+
+  <!-- AMOUNT -->
+  <div class="amount-box fu fu-2">
+    <p class="amount-label">Total Amount to Transfer</p>
+    <div class="amount-value" id="amount-display">—</div>
+    <p class="amount-note">Transfer this exact amount to the account below</p>
+  </div>
+
+  <!-- BANK DETAILS -->
+  <div class="bank-card fu fu-3">
+    <div class="bank-header">
+      <div class="bank-icon">🏦</div>
+      <div>
+        <h3>Bank Transfer Details</h3>
+        <p>Transfer to this account to confirm your slot</p>
+      </div>
+    </div>
+    <div class="bank-row">
+      <span class="bank-row-label">Bank Name</span>
+      <span class="bank-row-value">Moniepoint</span>
+    </div>
+    <div class="bank-row">
+      <span class="bank-row-label">Account Number</span>
+      <span style="display:flex;align-items:center">
+        <span class="bank-row-value acct-num">9160013685</span>
+        <button class="copy-btn" onclick="copyAcct(this)">Copy</button>
+      </span>
+    </div>
+    <div class="bank-row">
+      <span class="bank-row-label">Account Name</span>
+      <span class="bank-row-value">Joshua Enaholo Ovbiagele</span>
+    </div>
+  </div>
+
+  <!-- HOW TO PAY -->
+  <div class="steps-card fu fu-4">
+    <p class="steps-title">How to Complete Payment</p>
+    <div class="step-item">
+      <div class="step-num">1</div>
+      <div class="step-text">Open your banking app and select <span>Transfer → Other Banks</span></div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">2</div>
+      <div class="step-text">Select <span>Moniepoint</span> as the bank and enter account number <span>9160013685</span></div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">3</div>
+      <div class="step-text">Enter the <span>exact amount</span> shown above — including the full figure</div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">4</div>
+      <div class="step-text">After transfer, <span>screenshot your receipt</span> then tap the button below to send it to us</div>
+    </div>
+  </div>
+
+  <!-- WHATSAPP CTA -->
+  <div class="wa-section fu fu-5">
+    <div class="wa-divider"><span>After Payment</span></div>
+    <a id="wa-btn" href="#" class="wa-btn" target="_blank">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Payment Completed — Send Receipt
+    </a>
+    <p class="wa-note">Click the button above after payment to send your payment receipt.<br><strong>We'll confirm your slot and reach out within minutes.</strong></p>
+  </div>
+
+  <div class="pay-footer">
+    <div class="footer-logo">ELITE <span>TRAFFIC</span> MEDIA</div>
+    <p>© 2026 Elite Traffic Media Agency. All rights reserved.</p>
+  </div>
+</div>
+
+<script>
+  const plans = {
+    basic:    { name: "Basic Plan (1–7 Days)",    amount: "₦50,100" },
+    standard: { name: "Standard Plan (1–14 Days)", amount: "₦90,100" },
+    pro:      { name: "Pro Plan (3 Weeks)",         amount: "₦140,100" },
+    extended: { name: "Extended Plan (4 Weeks)",    amount: "₦180,100" }
+  };
+
+  const WA_NUMBER = "2347000000000"; // ← REPLACE with your WhatsApp number
+
+  const params = new URLSearchParams(window.location.search);
+  const key = params.get("plan") || "basic";
+  const plan = plans[key] || plans.basic;
+
+  document.getElementById("plan-name-display").textContent = plan.name;
+  document.getElementById("amount-display").textContent = plan.amount;
+
+  const msg = encodeURIComponent(
+    "Greetings Elite Traffic Media, I Just Completed My Payment For The " +
+    plan.name + ".. Here Is My Receipt."
+  );
+  document.getElementById("wa-btn").href = "https://wa.me/" + WA_NUMBER + "?text=" + msg;
+
+  function copyAcct(btn) {
+    navigator.clipboard.writeText("9160013685").then(() => {
+      btn.textContent = "Copied!";
+      btn.classList.add("copied");
+      setTimeout(() => { btn.textContent = "Copy"; btn.classList.remove("copied"); }, 2000);
+    });
+  }
+</script>
+</body>
+</html>
